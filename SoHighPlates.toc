@@ -6,6 +6,7 @@
 ## SavedVariables: __sNpConfig
 ## SavedVariablesPerCharacter: _sNpCColor, _sNpLevel, _sNpName, _sNpGlow, _sNpSBtxt, _sNpFNk, _sNpFNp, _sNpBorder, _sNpCIcon, _sNpTotem, _sNpBgHide, _sNpTColor
 
+locale.lua
 __sNpPlate.lua
 __sNpCore.lua
 __sNpOptions.lua

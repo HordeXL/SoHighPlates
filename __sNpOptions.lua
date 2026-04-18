@@ -1,4 +1,17 @@
-local font, fMenu, fSlider, fLine = __sNpCore.art.font.cstm.b[1], 13, 13, 'OUTLINE'
+-- 获取本地化表
+local L = _G["SoHighPlatesLocals"] or {}
+
+-- 中文客户端使用默认字体，其他客户端使用自定义字体
+local locale = GetLocale()
+local isChineseClient = (locale == "zhCN" or locale == "zhTW")
+local font, fMenu, fSlider, fLine
+if isChineseClient then
+	font = 'Fonts\\ARKai_T.ttf'
+	fMenu, fSlider, fLine = 13, 13, 'OUTLINE'
+else
+	font = __sNpCore.art.font.cstm.b[1]
+	fMenu, fSlider, fLine = 13, 13, 'OUTLINE'
+end
 local _, class = UnitClass'player'
 local colour = RAID_CLASS_COLORS[class]
 --///******** Menu ********///
@@ -28,7 +41,7 @@ __sNpMenu.header:SetVertexColor(unpack(__sNpCore.art.backdrop.header.c))
 __sNpMenu.header.t = __sNpMenu:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
 __sNpMenu.header.t:SetPoint('TOP', __sNpMenu.header, 0, -14)
 __sNpMenu.header.t:SetFont(font, fMenu, fLine)
-__sNpMenu.header.t:SetText'— Options —'
+__sNpMenu.header.t:SetText(L["— Options —"] or "— Options —")
 
 __sNpMenu.intro = __sNpMenu:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
 __sNpMenu.intro:SetPoint('TOP', __sNpMenu, 0, -33)
@@ -39,7 +52,7 @@ __sNpMenu.intro:SetText'|c00ffffff**|r |c00ff00ffSoHigh|r|c0030d5c8Plates|r v2.|
 __sNpMenu.titleMain = __sNpMenu:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
 __sNpMenu.titleMain:SetTextColor(colour.r, colour.g, colour.b)
 __sNpMenu.titleMain:SetPoint('TOP', __sNpMenu.intro, 0, -28)
-__sNpMenu.titleMain:SetText'— Main Settings —'
+__sNpMenu.titleMain:SetText(L["— Main Settings —"] or "— Main Settings —")
 __sNpMenu.titleMain:SetFont(font, fSlider, fLine)
 
 --///******** Class Colors ********///
@@ -50,7 +63,7 @@ __sNpMenu.ClassColor:SetPoint('TOPLEFT', __sNpMenu.intro, -15, -45)
 	_G[__sNpMenu.ClassColor:GetName()..'Text']:SetWidth(270)
 	_G[__sNpMenu.ClassColor:GetName()..'Text']:SetPoint('LEFT', __sNpMenu.ClassColor, 'RIGHT', 4, 0)
 	_G[__sNpMenu.ClassColor:GetName()..'Text']:SetFont(font, fMenu, fLine)
-	_G[__sNpMenu.ClassColor:GetName()..'Text']:SetText'|c00ffffffClass Colors|r'
+	_G[__sNpMenu.ClassColor:GetName()..'Text']:SetText('|c00ffffff' .. (L["Class Colors"] or "Class Colors") .. '|r')
 --///******** Name Hider ********///
 __sNpMenu.NameHide = CreateFrame('CheckButton', 'sNp.NameHide', __sNpMenu, 'UICheckButtonTemplate')
 __sNpMenu.NameHide:SetHeight(20) __sNpMenu.NameHide:SetWidth(20)
@@ -59,7 +72,7 @@ __sNpMenu.NameHide:SetPoint('TOPLEFT', __sNpMenu.ClassColor, 0, -20)
 	_G[__sNpMenu.NameHide:GetName()..'Text']:SetWidth(270)
 	_G[__sNpMenu.NameHide:GetName()..'Text']:SetPoint('LEFT', __sNpMenu.NameHide, 'RIGHT', 4, 0)
 	_G[__sNpMenu.NameHide:GetName()..'Text']:SetFont(font, fMenu, fLine)
-	_G[__sNpMenu.NameHide:GetName()..'Text']:SetText'|c00ffffffHide Name|r'
+	_G[__sNpMenu.NameHide:GetName()..'Text']:SetText('|c00ffffff' .. (L["Hide Name"] or "Hide Name") .. '|r')
 --///******** Level Hider ********///
 __sNpMenu.LevelShow = CreateFrame('CheckButton', 'sNp.level', __sNpMenu, 'UICheckButtonTemplate')
 __sNpMenu.LevelShow:SetHeight(20) __sNpMenu.LevelShow:SetWidth(20)
@@ -68,7 +81,7 @@ __sNpMenu.LevelShow:SetPoint('TOPLEFT', __sNpMenu.NameHide, 0, -20)
 	_G[__sNpMenu.LevelShow:GetName()..'Text']:SetWidth(270)
 	_G[__sNpMenu.LevelShow:GetName()..'Text']:SetPoint('LEFT', __sNpMenu.LevelShow, 'RIGHT', 4, 0)
 	_G[__sNpMenu.LevelShow:GetName()..'Text']:SetFont(font, fMenu, fLine)
-	_G[__sNpMenu.LevelShow:GetName()..'Text']:SetText'|c00ffffffShow Level|r'
+	_G[__sNpMenu.LevelShow:GetName()..'Text']:SetText('|c00ffffff' .. (L["Show Level"] or "Show Level") .. '|r')
 --///******** Glow Texture ********///
 __sNpMenu.TargetGlow = CreateFrame('CheckButton', 'sNp.TargetGlow', __sNpMenu, 'UICheckButtonTemplate')
 __sNpMenu.TargetGlow:SetHeight(20) __sNpMenu.TargetGlow:SetWidth(20)
@@ -77,7 +90,7 @@ __sNpMenu.TargetGlow:SetPoint('TOPLEFT', __sNpMenu.LevelShow, 0, -20)
 	_G[__sNpMenu.TargetGlow:GetName()..'Text']:SetWidth(270)
 	_G[__sNpMenu.TargetGlow:GetName()..'Text']:SetPoint('LEFT', __sNpMenu.TargetGlow, 'RIGHT', 4, 0)
 	_G[__sNpMenu.TargetGlow:GetName()..'Text']:SetFont(font, fMenu, fLine)
-	_G[__sNpMenu.TargetGlow:GetName()..'Text']:SetText'|c00ffffffTarget Glow|r'
+	_G[__sNpMenu.TargetGlow:GetName()..'Text']:SetText('|c00ffffff' .. (L["Target Glow"] or "Target Glow") .. '|r')
 --///******** Status Bar Text ********///
 __sNpMenu.SBtext = CreateFrame('CheckButton', 'sNp.SBtext', __sNpMenu, 'UICheckButtonTemplate')
 __sNpMenu.SBtext:SetHeight(20) __sNpMenu.SBtext:SetWidth(20)
@@ -86,7 +99,7 @@ __sNpMenu.SBtext:SetPoint('TOPLEFT', __sNpMenu.intro, 90, -45)
 	_G[__sNpMenu.SBtext:GetName()..'Text']:SetWidth(270)
 	_G[__sNpMenu.SBtext:GetName()..'Text']:SetPoint('LEFT', __sNpMenu.SBtext, 'RIGHT', 4, 0)
 	_G[__sNpMenu.SBtext:GetName()..'Text']:SetFont(font, fMenu, fLine)
-	_G[__sNpMenu.SBtext:GetName()..'Text']:SetText'|c00ffffffShow|r |cffFF7D0AStatus|r'
+	_G[__sNpMenu.SBtext:GetName()..'Text']:SetText('|c00ffffff' .. (L["Show"] or "Show") .. '|r |cffFF7D0A' .. (L["Status"] or "Status") .. '|r')
 --///******** Status Format ********///
 __sNpMenu.FormatOnly = CreateFrame('CheckButton', 'sNp.FormatOnly', __sNpMenu, 'UICheckButtonTemplate')
 __sNpMenu.FormatOnly:SetHeight(20) __sNpMenu.FormatOnly:SetWidth(20)
@@ -95,7 +108,7 @@ __sNpMenu.FormatOnly:SetPoint('TOPLEFT', __sNpMenu.SBtext, 0, -20)
 	_G[__sNpMenu.FormatOnly:GetName()..'Text']:SetWidth(270)
 	_G[__sNpMenu.FormatOnly:GetName()..'Text']:SetPoint('LEFT', __sNpMenu.FormatOnly, 'RIGHT', 4, 0)
 	_G[__sNpMenu.FormatOnly:GetName()..'Text']:SetFont(font, fMenu, fLine)
-	_G[__sNpMenu.FormatOnly:GetName()..'Text']:SetText'|c00ffffffShow Only|r |c00bce4d0k|r'
+	_G[__sNpMenu.FormatOnly:GetName()..'Text']:SetText('|c00ffffff' .. (L["Show Only"] or "Show Only") .. '|r |c00bce4d0k|r')
 --///******** Status Percentage ********///
 __sNpMenu.PercentOnly = CreateFrame('CheckButton', 'sNp.PercentOnly', __sNpMenu, 'UICheckButtonTemplate')
 __sNpMenu.PercentOnly:SetHeight(20) __sNpMenu.PercentOnly:SetWidth(20)
@@ -104,7 +117,7 @@ __sNpMenu.PercentOnly:SetPoint('TOPLEFT', __sNpMenu.FormatOnly, 0, -20)
 	_G[__sNpMenu.PercentOnly:GetName()..'Text']:SetWidth(270)
 	_G[__sNpMenu.PercentOnly:GetName()..'Text']:SetPoint('LEFT', __sNpMenu.PercentOnly, 'RIGHT', 4, 0)
 	_G[__sNpMenu.PercentOnly:GetName()..'Text']:SetFont(font, fMenu, fLine)
-	_G[__sNpMenu.PercentOnly:GetName()..'Text']:SetText'|c00ffffffShow Only|r |c00b4ff7d%|r'
+	_G[__sNpMenu.PercentOnly:GetName()..'Text']:SetText('|c00ffffff' .. (L["Show Only"] or "Show Only") .. '|r |c00b4ff7d%|r')
 --///******** Status Glow ********///
 __sNpMenu.StatusGlow = CreateFrame('CheckButton', 'sNp.StatusGlow', __sNpMenu, 'UICheckButtonTemplate')
 __sNpMenu.StatusGlow:SetHeight(20) __sNpMenu.StatusGlow:SetWidth(20)
@@ -113,7 +126,7 @@ __sNpMenu.StatusGlow:SetPoint('TOPLEFT', __sNpMenu.PercentOnly, 0, -20)
 	_G[__sNpMenu.StatusGlow:GetName()..'Text']:SetWidth(270)
 	_G[__sNpMenu.StatusGlow:GetName()..'Text']:SetPoint('LEFT', __sNpMenu.StatusGlow, 'RIGHT', 4, 0)
 	_G[__sNpMenu.StatusGlow:GetName()..'Text']:SetFont(font, fMenu, fLine)
-	_G[__sNpMenu.StatusGlow:GetName()..'Text']:SetText'|c00ffffffStatus Glow|r'
+	_G[__sNpMenu.StatusGlow:GetName()..'Text']:SetText('|c00ffffff' .. (L["Status Glow"] or "Status Glow") .. '|r')
 --///******** Class Icons ********///
 __sNpMenu.ClassIcon = CreateFrame('CheckButton', 'sNp.ClassIcon', __sNpMenu, 'UICheckButtonTemplate')
 __sNpMenu.ClassIcon:SetHeight(20) __sNpMenu.ClassIcon:SetWidth(20)
@@ -122,7 +135,7 @@ __sNpMenu.ClassIcon:SetPoint('TOPLEFT', __sNpMenu.SBtext, 107, 0)
 	_G[__sNpMenu.ClassIcon:GetName()..'Text']:SetWidth(270)
 	_G[__sNpMenu.ClassIcon:GetName()..'Text']:SetPoint('LEFT', __sNpMenu.ClassIcon, 'RIGHT', 4, 0)
 	_G[__sNpMenu.ClassIcon:GetName()..'Text']:SetFont(font, fMenu, fLine)
-	_G[__sNpMenu.ClassIcon:GetName()..'Text']:SetText'|c00ffffffClass Icons|r'
+	_G[__sNpMenu.ClassIcon:GetName()..'Text']:SetText('|c00ffffff' .. (L["Class Icons"] or "Class Icons") .. '|r')
 --///******** Totem Icons ********///
 __sNpMenu.TotemIcon = CreateFrame('CheckButton', 'sNp.TotemIcon', __sNpMenu, 'UICheckButtonTemplate')
 __sNpMenu.TotemIcon:SetHeight(20) __sNpMenu.TotemIcon:SetWidth(20)
@@ -131,7 +144,7 @@ __sNpMenu.TotemIcon:SetPoint('TOPLEFT', __sNpMenu.ClassIcon, 0, -20)
 	_G[__sNpMenu.TotemIcon:GetName()..'Text']:SetWidth(270)
 	_G[__sNpMenu.TotemIcon:GetName()..'Text']:SetPoint('LEFT', __sNpMenu.TotemIcon, 'RIGHT', 4, 0)
 	_G[__sNpMenu.TotemIcon:GetName()..'Text']:SetFont(font, fMenu, fLine)
-	_G[__sNpMenu.TotemIcon:GetName()..'Text']:SetText'|c00ffffffTotem Icons|r'
+	_G[__sNpMenu.TotemIcon:GetName()..'Text']:SetText('|c00ffffff' .. (L["Totem Icons"] or "Totem Icons") .. '|r')
 --///******** Background Hider ********///
 __sNpMenu.BgHide = CreateFrame('CheckButton', 'sNp.BgHide ', __sNpMenu, 'UICheckButtonTemplate')
 __sNpMenu.BgHide:SetHeight(20) __sNpMenu.BgHide:SetWidth(20)
@@ -140,7 +153,7 @@ __sNpMenu.BgHide:SetPoint('TOPLEFT', __sNpMenu.TotemIcon, 0, -20)
 	_G[__sNpMenu.BgHide:GetName()..'Text']:SetWidth(270)
 	_G[__sNpMenu.BgHide:GetName()..'Text']:SetPoint('LEFT', __sNpMenu.BgHide, 'RIGHT', 4, 0)
 	_G[__sNpMenu.BgHide:GetName()..'Text']:SetFont(font, fMenu, fLine)
-	_G[__sNpMenu.BgHide:GetName()..'Text']:SetText'|c00ffffffEmpty Back|r'
+	_G[__sNpMenu.BgHide:GetName()..'Text']:SetText('|c00ffffff' .. (L["Empty Back"] or "Empty Back") .. '|r')
 --///******** Text & Texture Colors ********///
 __sNpMenu.TextColor = CreateFrame('CheckButton', 'sNp.TextColor ', __sNpMenu, 'UICheckButtonTemplate')
 __sNpMenu.TextColor:SetHeight(20) __sNpMenu.TextColor:SetWidth(20)
@@ -149,7 +162,7 @@ __sNpMenu.TextColor:SetPoint('TOPLEFT', __sNpMenu.BgHide, 0, -20)
 	_G[__sNpMenu.TextColor:GetName()..'Text']:SetWidth(270)
 	_G[__sNpMenu.TextColor:GetName()..'Text']:SetPoint('LEFT', __sNpMenu.TextColor, 'RIGHT', 4, 0)
 	_G[__sNpMenu.TextColor:GetName()..'Text']:SetFont(font, fMenu, fLine)
-	_G[__sNpMenu.TextColor:GetName()..'Text']:SetText'|c00ffffffPlate Coloring|r'
+	_G[__sNpMenu.TextColor:GetName()..'Text']:SetText('|c00ffffff' .. (L["Plate Coloring"] or "Plate Coloring") .. '|r')
 --//*******************************************************************//
 __sNpMenu.ClassColor:SetScript('OnClick', function()
 	if this:GetChecked() == 1 then
@@ -239,7 +252,7 @@ end)
 __sNpMenu.titleWidget = __sNpMenu:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
 __sNpMenu.titleWidget:SetTextColor(colour.r, colour.g, colour.b)
 __sNpMenu.titleWidget:SetPoint('TOP', __sNpMenu.StatusGlow, 42, -28)
-__sNpMenu.titleWidget:SetText'— Widget  &  Position —'
+__sNpMenu.titleWidget:SetText(L["— Widget  &  Position —"] or "— Widget  &  Position —")
 __sNpMenu.titleWidget:SetFont(font, fSlider, fLine)
 --///******** Slider Settings ********///
 __sNpMenu.hpWidth = CreateFrame('Slider', 'sNpOptions.hpWidth', __sNpMenu, 'OptionsSliderTemplate')
@@ -254,7 +267,7 @@ end)
 
 	_G[__sNpMenu.hpWidth:GetName()..'Low']:SetText'0%'
 	_G[__sNpMenu.hpWidth:GetName()..'High']:SetText'|cffFF7D0A100%|r'
-	_G[__sNpMenu.hpWidth:GetName()..'Text']:SetText'Health Width'
+	_G[__sNpMenu.hpWidth:GetName()..'Text']:SetText(L["Health Width"] or "Health Width")
 	_G[__sNpMenu.hpWidth:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.hpHeight = CreateFrame('Slider', 'sNpOptions.hpHeight', __sNpMenu, 'OptionsSliderTemplate')
@@ -269,7 +282,7 @@ end)
 
 	_G[__sNpMenu.hpHeight:GetName()..'Low']:SetText'0%'
 	_G[__sNpMenu.hpHeight:GetName()..'High']:SetText'|cffFF7D0A100%|r'
-	_G[__sNpMenu.hpHeight:GetName()..'Text']:SetText'Health Height'
+	_G[__sNpMenu.hpHeight:GetName()..'Text']:SetText(L["Health Height"] or "Health Height")
 	_G[__sNpMenu.hpHeight:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.cbWidth = CreateFrame('Slider', 'sNpOptions.cbWidth', __sNpMenu, 'OptionsSliderTemplate')
@@ -284,7 +297,7 @@ end)
 
 	_G[__sNpMenu.cbWidth:GetName()..'Low']:SetText'0%'
 	_G[__sNpMenu.cbWidth:GetName()..'High']:SetText'|cffFF7D0A100%|r'
-	_G[__sNpMenu.cbWidth:GetName()..'Text']:SetText'Cast Width'
+	_G[__sNpMenu.cbWidth:GetName()..'Text']:SetText(L["Cast Width"] or "Cast Width")
 	_G[__sNpMenu.cbWidth:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.cbHeight = CreateFrame('Slider', 'sNpOptions.cbHeight', __sNpMenu, 'OptionsSliderTemplate')
@@ -299,7 +312,7 @@ end)
 
 	_G[__sNpMenu.cbHeight:GetName()..'Low']:SetText'0%'
 	_G[__sNpMenu.cbHeight:GetName()..'High']:SetText'|cffFF7D0A100%|r'
-	_G[__sNpMenu.cbHeight:GetName()..'Text']:SetText'Cast Height'
+	_G[__sNpMenu.cbHeight:GetName()..'Text']:SetText(L["Cast Height"] or "Cast Height")
 	_G[__sNpMenu.cbHeight:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.levelXpos = CreateFrame('Slider', 'sNpOptions.levelXpos', __sNpMenu, 'OptionsSliderTemplate')
@@ -314,7 +327,7 @@ end)
 
 	_G[__sNpMenu.levelXpos:GetName()..'Low']:SetText'(<)'
 	_G[__sNpMenu.levelXpos:GetName()..'High']:SetText'(|c00b4ff7d>|r)'
-	_G[__sNpMenu.levelXpos:GetName()..'Text']:SetText'Level X'
+	_G[__sNpMenu.levelXpos:GetName()..'Text']:SetText(L["Level X"] or "Level X")
 	_G[__sNpMenu.levelXpos:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.levelYpos = CreateFrame('Slider', 'sNpOptions.levelYpos', __sNpMenu, 'OptionsSliderTemplate')
@@ -329,7 +342,7 @@ end)
 
 	_G[__sNpMenu.levelYpos:GetName()..'Low']:SetText'(-)'
 	_G[__sNpMenu.levelYpos:GetName()..'High']:SetText'(|c00b4ff7d+|r)'
-	_G[__sNpMenu.levelYpos:GetName()..'Text']:SetText'Level Y'
+	_G[__sNpMenu.levelYpos:GetName()..'Text']:SetText(L["Level Y"] or "Level Y")
 	_G[__sNpMenu.levelYpos:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.nameXpos = CreateFrame('Slider', 'sNpOptions.nameXpos', __sNpMenu, 'OptionsSliderTemplate')
@@ -344,7 +357,7 @@ end)
 
 	_G[__sNpMenu.nameXpos:GetName()..'Low']:SetText'(<)'
 	_G[__sNpMenu.nameXpos:GetName()..'High']:SetText'(|c00b4ff7d>|r)'
-	_G[__sNpMenu.nameXpos:GetName()..'Text']:SetText'Name X'
+	_G[__sNpMenu.nameXpos:GetName()..'Text']:SetText(L["Name X"] or "Name X")
 	_G[__sNpMenu.nameXpos:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.nameYpos = CreateFrame('Slider', 'sNpOptions.nameYpos', __sNpMenu, 'OptionsSliderTemplate')
@@ -359,7 +372,7 @@ end)
 
 	_G[__sNpMenu.nameYpos:GetName()..'Low']:SetText'(-)'
 	_G[__sNpMenu.nameYpos:GetName()..'High']:SetText'(|c00b4ff7d+|r)'
-	_G[__sNpMenu.nameYpos:GetName()..'Text']:SetText'Name Y'
+	_G[__sNpMenu.nameYpos:GetName()..'Text']:SetText(L["Name Y"] or "Name Y")
 	_G[__sNpMenu.nameYpos:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.timeXpos = CreateFrame('Slider', 'sNpOptions.timeXpos', __sNpMenu, 'OptionsSliderTemplate')
@@ -374,7 +387,7 @@ end)
 
 	_G[__sNpMenu.timeXpos:GetName()..'Low']:SetText'(<)'
 	_G[__sNpMenu.timeXpos:GetName()..'High']:SetText'(|c00b4ff7d>|r)'
-	_G[__sNpMenu.timeXpos:GetName()..'Text']:SetText'Cast Time X'
+	_G[__sNpMenu.timeXpos:GetName()..'Text']:SetText(L["Cast Time X"] or "Cast Time X")
 	_G[__sNpMenu.timeXpos:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.timeYpos = CreateFrame('Slider', 'sNpOptions.timeYpos', __sNpMenu, 'OptionsSliderTemplate')
@@ -389,7 +402,7 @@ end)
 
 	_G[__sNpMenu.timeYpos:GetName()..'Low']:SetText'(-)'
 	_G[__sNpMenu.timeYpos:GetName()..'High']:SetText'(|c00b4ff7d+|r)'
-	_G[__sNpMenu.timeYpos:GetName()..'Text']:SetText'Cast Time Y'
+	_G[__sNpMenu.timeYpos:GetName()..'Text']:SetText(L["Cast Time Y"] or "Cast Time Y")
 	_G[__sNpMenu.timeYpos:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.sbNumXpos = CreateFrame('Slider', 'sNpOptions.sbNumXpos', __sNpMenu, 'OptionsSliderTemplate')
@@ -404,7 +417,7 @@ end)
 
 	_G[__sNpMenu.sbNumXpos:GetName()..'Low']:SetText'(<)'
 	_G[__sNpMenu.sbNumXpos:GetName()..'High']:SetText'(|c00b4ff7d>|r)'
-	_G[__sNpMenu.sbNumXpos:GetName()..'Text']:SetText'Status Text X'
+	_G[__sNpMenu.sbNumXpos:GetName()..'Text']:SetText(L["Status Text X"] or "Status Text X")
 	_G[__sNpMenu.sbNumXpos:GetName()..'Text']:SetFont(font, fSlider, fLine)
 	_G[__sNpMenu.sbNumXpos:GetName()..'Text']:SetTextColor(colour.r, colour.g, colour.b)
 
@@ -420,7 +433,7 @@ end)
 
 	_G[__sNpMenu.spellNameYpos:GetName()..'Low']:SetText'(-)'
 	_G[__sNpMenu.spellNameYpos:GetName()..'High']:SetText'(|c00b4ff7d+|r)'
-	_G[__sNpMenu.spellNameYpos:GetName()..'Text']:SetText'Spell Name Y'
+	_G[__sNpMenu.spellNameYpos:GetName()..'Text']:SetText(L["Spell Name Y"] or "Spell Name Y")
 	_G[__sNpMenu.spellNameYpos:GetName()..'Text']:SetFont(font, fSlider, fLine)
 	_G[__sNpMenu.spellNameYpos:GetName()..'Text']:SetTextColor(colour.r, colour.g, colour.b)
 
@@ -436,7 +449,7 @@ end)
 
 	_G[__sNpMenu.spellIconXpos:GetName()..'Low']:SetText'(<)'
 	_G[__sNpMenu.spellIconXpos:GetName()..'High']:SetText'(|c00b4ff7d>|r)'
-	_G[__sNpMenu.spellIconXpos:GetName()..'Text']:SetText'Spell Icon X'
+	_G[__sNpMenu.spellIconXpos:GetName()..'Text']:SetText(L["Spell Icon X"] or "Spell Icon X")
 	_G[__sNpMenu.spellIconXpos:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.spellIconYpos = CreateFrame('Slider', 'sNpOptions.spellIconYpos', __sNpMenu, 'OptionsSliderTemplate')
@@ -451,7 +464,7 @@ end)
 
 	_G[__sNpMenu.spellIconYpos:GetName()..'Low']:SetText'(-)'
 	_G[__sNpMenu.spellIconYpos:GetName()..'High']:SetText'(|c00b4ff7d+|r)'
-	_G[__sNpMenu.spellIconYpos:GetName()..'Text']:SetText'Spell Icon Y'
+	_G[__sNpMenu.spellIconYpos:GetName()..'Text']:SetText(L["Spell Icon Y"] or "Spell Icon Y")
 	_G[__sNpMenu.spellIconYpos:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.classIconXpos = CreateFrame('Slider', 'sNpOptions.classIconXpos', __sNpMenu, 'OptionsSliderTemplate')
@@ -466,7 +479,7 @@ end)
 
 	_G[__sNpMenu.classIconXpos:GetName()..'Low']:SetText'(<)'
 	_G[__sNpMenu.classIconXpos:GetName()..'High']:SetText'(|c00b4ff7d>|r)'
-	_G[__sNpMenu.classIconXpos:GetName()..'Text']:SetText'Class Icon X'
+	_G[__sNpMenu.classIconXpos:GetName()..'Text']:SetText(L["Class Icon X"] or "Class Icon X")
 	_G[__sNpMenu.classIconXpos:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.classIconYpos = CreateFrame('Slider', 'sNpOptions.classIconYpos', __sNpMenu, 'OptionsSliderTemplate')
@@ -481,7 +494,7 @@ end)
 
 	_G[__sNpMenu.classIconYpos:GetName()..'Low']:SetText'(-)'
 	_G[__sNpMenu.classIconYpos:GetName()..'High']:SetText'(|c00b4ff7d+|r)'
-	_G[__sNpMenu.classIconYpos:GetName()..'Text']:SetText'Class Icon Y'
+	_G[__sNpMenu.classIconYpos:GetName()..'Text']:SetText(L["Class Icon Y"] or "Class Icon Y")
 	_G[__sNpMenu.classIconYpos:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.hpBarYpos = CreateFrame('Slider', 'sNpOptions.hpBarYpos', __sNpMenu, 'OptionsSliderTemplate')
@@ -496,7 +509,7 @@ end)
 
 	_G[__sNpMenu.hpBarYpos:GetName()..'Low']:SetText'(-)'
 	_G[__sNpMenu.hpBarYpos:GetName()..'High']:SetText'(|c00b4ff7d+|r)'
-	_G[__sNpMenu.hpBarYpos:GetName()..'Text']:SetText'|c00ffffffHealth High|r'
+	_G[__sNpMenu.hpBarYpos:GetName()..'Text']:SetText('|c00ffffff' .. (L["Health High"] or "Health High") .. '|r')
 	_G[__sNpMenu.hpBarYpos:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.cbBarYpos = CreateFrame('Slider', 'sNpOptions.cbBarYpos', __sNpMenu, 'OptionsSliderTemplate')
@@ -511,14 +524,14 @@ end)
 
 	_G[__sNpMenu.cbBarYpos:GetName()..'Low']:SetText'(-)'
 	_G[__sNpMenu.cbBarYpos:GetName()..'High']:SetText'(|c00b4ff7d+|r)'
-	_G[__sNpMenu.cbBarYpos:GetName()..'Text']:SetText'|c00ffffffCast High|r'
+	_G[__sNpMenu.cbBarYpos:GetName()..'Text']:SetText('|c00ffffff' .. (L["Cast High"] or "Cast High") .. '|r')
 	_G[__sNpMenu.cbBarYpos:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 --//*******************************************************************//
 __sNpMenu.titleMedia = __sNpMenu:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
 __sNpMenu.titleMedia:SetTextColor(colour.r, colour.g, colour.b)
 __sNpMenu.titleMedia:SetPoint('TOP', __sNpMenu.cbBarYpos, -80, -33)
-__sNpMenu.titleMedia:SetText'— Size  &  Media —'
+__sNpMenu.titleMedia:SetText(L["— Size  &  Media —"] or "— Size  &  Media —")
 __sNpMenu.titleMedia:SetFont(font, fSlider, fLine)
 --//*******************************************************************//
 __sNpMenu.totemSize = CreateFrame('Slider', 'sNpOptions.totemSize', __sNpMenu, 'OptionsSliderTemplate')
@@ -533,7 +546,7 @@ end)
 
 	_G[__sNpMenu.totemSize:GetName()..'Low']:SetText'S'
 	_G[__sNpMenu.totemSize:GetName()..'High']:SetText'|cffFF7D0AXXL|r'
-	_G[__sNpMenu.totemSize:GetName()..'Text']:SetText'Totem Icon Size'
+	_G[__sNpMenu.totemSize:GetName()..'Text']:SetText(L["Totem Icon Size"] or "Totem Icon Size")
 	_G[__sNpMenu.totemSize:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.spellSize = CreateFrame('Slider', 'sNpOptions.spellSize', __sNpMenu, 'OptionsSliderTemplate')
@@ -548,7 +561,7 @@ end)
 
 	_G[__sNpMenu.spellSize:GetName()..'Low']:SetText'S'
 	_G[__sNpMenu.spellSize:GetName()..'High']:SetText'|cffFF7D0AXXL|r'
-	_G[__sNpMenu.spellSize:GetName()..'Text']:SetText'Spell Icon Size'
+	_G[__sNpMenu.spellSize:GetName()..'Text']:SetText(L["Spell Icon Size"] or "Spell Icon Size")
 	_G[__sNpMenu.spellSize:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.classSize = CreateFrame('Slider', 'sNpOptions.classSize', __sNpMenu, 'OptionsSliderTemplate')
@@ -563,7 +576,7 @@ end)
 
 	_G[__sNpMenu.classSize:GetName()..'Low']:SetText'S'
 	_G[__sNpMenu.classSize:GetName()..'High']:SetText'|cffFF7D0AXXL|r'
-	_G[__sNpMenu.classSize:GetName()..'Text']:SetText'Class Icon Size'
+	_G[__sNpMenu.classSize:GetName()..'Text']:SetText(L["Class Icon Size"] or "Class Icon Size")
 	_G[__sNpMenu.classSize:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.fontSize = CreateFrame('Slider', 'sNpOptions.fontSize', __sNpMenu, 'OptionsSliderTemplate')
@@ -578,7 +591,7 @@ end)
 
 	_G[__sNpMenu.fontSize:GetName()..'Low']:SetText'1'
 	_G[__sNpMenu.fontSize:GetName()..'High']:SetText'18'
-	_G[__sNpMenu.fontSize:GetName()..'Text']:SetText'Font Size'
+	_G[__sNpMenu.fontSize:GetName()..'Text']:SetText(L["Font Size"] or "Font Size")
 	_G[__sNpMenu.fontSize:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.classMedia = CreateFrame('Slider', 'sNpOptions.classMedia', __sNpMenu, 'OptionsSliderTemplate')
@@ -593,7 +606,7 @@ end)
 
 	_G[__sNpMenu.classMedia:GetName()..'Low']:SetText'(<)'
 	_G[__sNpMenu.classMedia:GetName()..'High']:SetText'(>)'
-	_G[__sNpMenu.classMedia:GetName()..'Text']:SetText'|c00ffffffClass Media|r'
+	_G[__sNpMenu.classMedia:GetName()..'Text']:SetText('|c00ffffff' .. (L["Class Media"] or "Class Media") .. '|r')
 	_G[__sNpMenu.classMedia:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.fontMedia = CreateFrame('Slider', 'sNpOptions.fontMedia', __sNpMenu, 'OptionsSliderTemplate')
@@ -608,7 +621,7 @@ end)
 
 	_G[__sNpMenu.fontMedia:GetName()..'Low']:SetText'(<)'
 	_G[__sNpMenu.fontMedia:GetName()..'High']:SetText'(>)'
-	_G[__sNpMenu.fontMedia:GetName()..'Text']:SetText'|c00ffffffFont Media|r'
+	_G[__sNpMenu.fontMedia:GetName()..'Text']:SetText('|c00ffffff' .. (L["Font Media"] or "Font Media") .. '|r')
 	_G[__sNpMenu.fontMedia:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.sbMedia = CreateFrame('Slider', 'sNpOptions.sbMedia', __sNpMenu, 'OptionsSliderTemplate')
@@ -623,7 +636,7 @@ end)
 
 	_G[__sNpMenu.sbMedia:GetName()..'Low']:SetText'(<)'
 	_G[__sNpMenu.sbMedia:GetName()..'High']:SetText'(>)'
-	_G[__sNpMenu.sbMedia:GetName()..'Text']:SetText'|c00ffffffBar Media|r'
+	_G[__sNpMenu.sbMedia:GetName()..'Text']:SetText('|c00ffffff' .. (L["Bar Media"] or "Bar Media") .. '|r')
 	_G[__sNpMenu.sbMedia:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 __sNpMenu.tgMedia = CreateFrame('Slider', 'sNpOptions.tgMedia', __sNpMenu, 'OptionsSliderTemplate')
@@ -638,13 +651,13 @@ end)
 
 	_G[__sNpMenu.tgMedia:GetName()..'Low']:SetText'(<)'
 	_G[__sNpMenu.tgMedia:GetName()..'High']:SetText'(>)'
-	_G[__sNpMenu.tgMedia:GetName()..'Text']:SetText'|c00ffffffGlow Media|r'
+	_G[__sNpMenu.tgMedia:GetName()..'Text']:SetText('|c00ffffff' .. (L["Glow Media"] or "Glow Media") .. '|r')
 	_G[__sNpMenu.tgMedia:GetName()..'Text']:SetFont(font, fSlider, fLine)
 
 --//*******************************************************************//
 __sNpMenu.resetdefault = CreateFrame('Button', 'sNp.resetdefault', __sNpMenu, 'UIPanelButtonTemplate')
 __sNpMenu.resetdefault:SetWidth(100) __sNpMenu.resetdefault:SetHeight(20)
-__sNpMenu.resetdefault:SetText'Reset'
+__sNpMenu.resetdefault:SetText(L["Reset"] or "Reset")
 __sNpMenu.resetdefault:SetFont(font, fMenu, fLine)
 __sNpMenu.resetdefault:SetPoint('TOP', __sNpMenu.tgMedia, -80, -35)
 __sNpMenu.resetdefault:SetScript('OnClick', function()
@@ -771,9 +784,9 @@ __sNpFrame:SetScript('OnEvent', function()
 end)
 --//*******************************************************************//
 StaticPopupDialogs['DEFAULT_RELOAD'] = {
-	text = 'Are you sure want reset to default settings?',
-	button1 = 'Yes & Reload',
-	button2 = 'Nope',
+	text = L["Are you sure want reset to default settings?"] or "Are you sure want reset to default settings?",
+	button1 = L["Yes & Reload"] or "Yes & Reload",
+	button2 = L["Nope"] or "Nope",
 	OnAccept = function()
 	__sNpCore:ResetOptions()
 		ReloadUI()

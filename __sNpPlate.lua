@@ -47,7 +47,12 @@ function sohighPlates:InitializeFrame(frame)
 	frame.health:SetAllPoints(frame.container)
 	
 	frame.health.percent = frame.health:CreateFontString(nil, 'OVERLAY')
-	frame.health.percent:SetFont(__sNpCore.art.font.cstm.a[1], (__sNpConfig.fontSize+4))
+	-- 中文客户端使用内置中文字体
+	if __sNpCore.art.chinese then
+		frame.health.percent:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize+4), __sNpCore.art.chinese[2])
+	else
+		frame.health.percent:SetFont(__sNpCore.art.font.cstm.a[1], (__sNpConfig.fontSize+4))
+	end
 	frame.health.percent:SetPoint('RIGHT', -5, 0)
 	frame.health.percent:SetTextColor(1, 1, 1)
 	frame.health.percent:SetJustifyH('RIGHT')
@@ -75,7 +80,12 @@ function sohighPlates:InitializeFrame(frame)
 	frame.level:SetParent(frame.health)
 	frame.level:ClearAllPoints()
 	frame.level:SetJustifyH('LEFT')
-	frame.level:SetFont(__sNpCore.art.font.cstm.a[1], (__sNpConfig.fontSize+4))
+	-- 中文客户端使用内置中文字体
+	if __sNpCore.art.chinese then
+		frame.level:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize+4), __sNpCore.art.chinese[2])
+	else
+		frame.level:SetFont(__sNpCore.art.font.cstm.a[1], (__sNpConfig.fontSize+4))
+	end
 	frame.level:SetShadowOffset(2, -2)
 	
 	nameTextRegion:Hide()
@@ -86,7 +96,12 @@ function sohighPlates:InitializeFrame(frame)
 	frame.name = frame:CreateFontString()
 	frame.name:SetParent(frame.health)
 	frame.name:SetPoint('BOTTOM', frame.health, 'TOP', __sNpConfig.nameXpos, __sNpConfig.nameYpos)
-	frame.name:SetFont(__sNpCore.art.font.cstm.a[1], (__sNpConfig.fontSize+4))
+	-- 中文客户端使用内置中文字体
+	if __sNpCore.art.chinese then
+		frame.name:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize+4), __sNpCore.art.chinese[2])
+	else
+		frame.name:SetFont(__sNpCore.art.font.cstm.a[1], (__sNpConfig.fontSize+4))
+	end
 	frame.name:SetTextColor(unpack(__sNpCore.status.name))
 	frame.name:SetShadowOffset(2, -2)
 	
@@ -132,12 +147,22 @@ function sohighPlates:InitializeFrame(frame)
 	frame.castbar.spellglow:SetBackdrop(__sNpCore.art.backdrop.spell)
 	
 	frame.castbar.time = frame.castbar:CreateFontString(nil, 'ARTWORK')
-	frame.castbar.time:SetFont(__sNpCore.art.font.default[1], (__sNpConfig.fontSize+4))
+	-- 中文客户端使用内置中文字体
+	if __sNpCore.art.chinese then
+		frame.castbar.time:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize+4), __sNpCore.art.chinese[2])
+	else
+		frame.castbar.time:SetFont(__sNpCore.art.font.default[1], (__sNpConfig.fontSize+4))
+	end
 	frame.castbar.time:SetTextColor(1, 1, 1)
 	frame.castbar.time:SetShadowOffset(2, -2)
 	
 	frame.castbar.name = frame.castbar:CreateFontString(nil, 'ARTWORK')
-	frame.castbar.name:SetFont(__sNpCore.art.font.default[1], (__sNpConfig.fontSize+4))
+	-- 中文客户端使用内置中文字体
+	if __sNpCore.art.chinese then
+		frame.castbar.name:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize+4), __sNpCore.art.chinese[2])
+	else
+		frame.castbar.name:SetFont(__sNpCore.art.font.default[1], (__sNpConfig.fontSize+4))
+	end
 	frame.castbar.name:SetTextColor(1, 1, 1)
 	frame.castbar.name:SetShadowOffset(2, -2)
 	

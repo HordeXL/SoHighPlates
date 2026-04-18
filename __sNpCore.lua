@@ -2,6 +2,11 @@ local __sNpCore = CreateFrame('Frame', '__sNpCore')
 _G['__sNpCore'] = __sNpCore
 
 __sNpCore.mediaFolder = 'Interface\\AddOns\\SoHighPlates\\media\\'
+
+-- 检测客户端语言并设置字体
+local locale = GetLocale()
+__sNpCore.isChineseClient = (locale == "zhCN" or locale == "zhTW")
+
 __sNpCore.art = {
     textures = {
 		bar = {
@@ -73,7 +78,9 @@ __sNpCore.art = {
             d = {__sNpCore.mediaFolder..'fonts\\AccidentalPresidency.ttf', 'OUTLINE'},
 			e = {__sNpCore.mediaFolder..'fonts\\PT_Sans_Narrow.ttf', 'OUTLINE'},
         }
-    }
+    },
+    -- 中文客户端使用内置字体
+    chinese = __sNpCore.isChineseClient and {'Fonts\\ARKai_T.ttf', 'OUTLINE'} or nil
 }
 __sNpCore.status = {
 	name = {.84, .75, .65},
@@ -595,47 +602,102 @@ function __sNpCore:ConfigSetValue(frame)
 		frame.classIcon:SetWidth(__sNpConfig.classSize)
 	end
 	if __sNpConfig.fontSize and (__sNpConfig.fontMedia == 1) then
-		frame.name:SetFont(__sNpCore.art.font.cstm.a[1], (__sNpConfig.fontSize+4))
-		frame.level:SetFont(__sNpCore.art.font.cstm.a[1], __sNpConfig.fontSize)
-		frame.oldname:SetFont(__sNpCore.art.font.cstm.a[1], (__sNpConfig.fontSize))
-		frame.castbar.time:SetFont(__sNpCore.art.font.cstm.a[1], __sNpConfig.fontSize)
-		frame.castbar.name:SetFont(__sNpCore.art.font.cstm.a[1], __sNpConfig.fontSize)
-		frame.health.percent:SetFont(__sNpCore.art.font.cstm.a[1], __sNpConfig.fontSize)
+		-- 中文客户端优先使用内置中文字体
+		if __sNpCore.isChineseClient then
+			frame.name:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize+4), __sNpCore.art.chinese[2])
+			frame.level:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+			frame.oldname:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize), __sNpCore.art.chinese[2])
+			frame.castbar.time:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+			frame.castbar.name:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+			frame.health.percent:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+		else
+			frame.name:SetFont(__sNpCore.art.font.cstm.a[1], (__sNpConfig.fontSize+4))
+			frame.level:SetFont(__sNpCore.art.font.cstm.a[1], __sNpConfig.fontSize)
+			frame.oldname:SetFont(__sNpCore.art.font.cstm.a[1], (__sNpConfig.fontSize))
+			frame.castbar.time:SetFont(__sNpCore.art.font.cstm.a[1], __sNpConfig.fontSize)
+			frame.castbar.name:SetFont(__sNpCore.art.font.cstm.a[1], __sNpConfig.fontSize)
+			frame.health.percent:SetFont(__sNpCore.art.font.cstm.a[1], __sNpConfig.fontSize)
+		end
 	elseif (__sNpConfig.fontMedia == 2) then
-		frame.name:SetFont(__sNpCore.art.font.cstm.b[1], (__sNpConfig.fontSize+4))
-		frame.level:SetFont(__sNpCore.art.font.cstm.b[1], __sNpConfig.fontSize)
-		frame.oldname:SetFont(__sNpCore.art.font.cstm.b[1], (__sNpConfig.fontSize))
-		frame.castbar.time:SetFont(__sNpCore.art.font.cstm.b[1], __sNpConfig.fontSize)
-		frame.castbar.name:SetFont(__sNpCore.art.font.cstm.b[1], __sNpConfig.fontSize)
-		frame.health.percent:SetFont(__sNpCore.art.font.cstm.b[1], __sNpConfig.fontSize)
+		if __sNpCore.isChineseClient then
+			frame.name:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize+4), __sNpCore.art.chinese[2])
+			frame.level:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+			frame.oldname:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize), __sNpCore.art.chinese[2])
+			frame.castbar.time:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+			frame.castbar.name:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+			frame.health.percent:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+		else
+			frame.name:SetFont(__sNpCore.art.font.cstm.b[1], (__sNpConfig.fontSize+4))
+			frame.level:SetFont(__sNpCore.art.font.cstm.b[1], __sNpConfig.fontSize)
+			frame.oldname:SetFont(__sNpCore.art.font.cstm.b[1], (__sNpConfig.fontSize))
+			frame.castbar.time:SetFont(__sNpCore.art.font.cstm.b[1], __sNpConfig.fontSize)
+			frame.castbar.name:SetFont(__sNpCore.art.font.cstm.b[1], __sNpConfig.fontSize)
+			frame.health.percent:SetFont(__sNpCore.art.font.cstm.b[1], __sNpConfig.fontSize)
+		end
 	elseif (__sNpConfig.fontMedia == 3) then
-		frame.name:SetFont(__sNpCore.art.font.cstm.c[1], (__sNpConfig.fontSize+4))
-		frame.level:SetFont(__sNpCore.art.font.cstm.c[1], __sNpConfig.fontSize)
-		frame.oldname:SetFont(__sNpCore.art.font.cstm.c[1], (__sNpConfig.fontSize))
-		frame.castbar.time:SetFont(__sNpCore.art.font.cstm.c[1], __sNpConfig.fontSize)
-		frame.castbar.name:SetFont(__sNpCore.art.font.cstm.c[1], __sNpConfig.fontSize)
-		frame.health.percent:SetFont(__sNpCore.art.font.cstm.c[1], __sNpConfig.fontSize)
+		if __sNpCore.isChineseClient then
+			frame.name:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize+4), __sNpCore.art.chinese[2])
+			frame.level:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+			frame.oldname:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize), __sNpCore.art.chinese[2])
+			frame.castbar.time:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+			frame.castbar.name:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+			frame.health.percent:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+		else
+			frame.name:SetFont(__sNpCore.art.font.cstm.c[1], (__sNpConfig.fontSize+4))
+			frame.level:SetFont(__sNpCore.art.font.cstm.c[1], __sNpConfig.fontSize)
+			frame.oldname:SetFont(__sNpCore.art.font.cstm.c[1], (__sNpConfig.fontSize))
+			frame.castbar.time:SetFont(__sNpCore.art.font.cstm.c[1], __sNpConfig.fontSize)
+			frame.castbar.name:SetFont(__sNpCore.art.font.cstm.c[1], __sNpConfig.fontSize)
+			frame.health.percent:SetFont(__sNpCore.art.font.cstm.c[1], __sNpConfig.fontSize)
+		end
 	elseif (__sNpConfig.fontMedia == 4) then
-		frame.name:SetFont(__sNpCore.art.font.cstm.d[1], (__sNpConfig.fontSize+4))
-		frame.level:SetFont(__sNpCore.art.font.cstm.d[1], __sNpConfig.fontSize)
-		frame.oldname:SetFont(__sNpCore.art.font.cstm.d[1], (__sNpConfig.fontSize))
-		frame.castbar.time:SetFont(__sNpCore.art.font.cstm.d[1], __sNpConfig.fontSize)
-		frame.castbar.name:SetFont(__sNpCore.art.font.cstm.d[1], __sNpConfig.fontSize)
-		frame.health.percent:SetFont(__sNpCore.art.font.cstm.d[1], __sNpConfig.fontSize)
+		if __sNpCore.isChineseClient then
+			frame.name:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize+4), __sNpCore.art.chinese[2])
+			frame.level:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+			frame.oldname:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize), __sNpCore.art.chinese[2])
+			frame.castbar.time:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+			frame.castbar.name:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+			frame.health.percent:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+		else
+			frame.name:SetFont(__sNpCore.art.font.cstm.d[1], (__sNpConfig.fontSize+4))
+			frame.level:SetFont(__sNpCore.art.font.cstm.d[1], __sNpConfig.fontSize)
+			frame.oldname:SetFont(__sNpCore.art.font.cstm.d[1], (__sNpConfig.fontSize))
+			frame.castbar.time:SetFont(__sNpCore.art.font.cstm.d[1], __sNpConfig.fontSize)
+			frame.castbar.name:SetFont(__sNpCore.art.font.cstm.d[1], __sNpConfig.fontSize)
+			frame.health.percent:SetFont(__sNpCore.art.font.cstm.d[1], __sNpConfig.fontSize)
+		end
 	elseif (__sNpConfig.fontMedia == 5) then
-		frame.name:SetFont(__sNpCore.art.font.cstm.e[1], (__sNpConfig.fontSize+4))
-		frame.level:SetFont(__sNpCore.art.font.cstm.e[1], __sNpConfig.fontSize)
-		frame.oldname:SetFont(__sNpCore.art.font.cstm.e[1], (__sNpConfig.fontSize))
-		frame.castbar.time:SetFont(__sNpCore.art.font.cstm.e[1], __sNpConfig.fontSize)
-		frame.castbar.name:SetFont(__sNpCore.art.font.cstm.e[1], __sNpConfig.fontSize)
-		frame.health.percent:SetFont(__sNpCore.art.font.cstm.e[1], __sNpConfig.fontSize)
+		if __sNpCore.isChineseClient then
+			frame.name:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize+4), __sNpCore.art.chinese[2])
+			frame.level:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+			frame.oldname:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize), __sNpCore.art.chinese[2])
+			frame.castbar.time:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+			frame.castbar.name:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+			frame.health.percent:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+		else
+			frame.name:SetFont(__sNpCore.art.font.cstm.e[1], (__sNpConfig.fontSize+4))
+			frame.level:SetFont(__sNpCore.art.font.cstm.e[1], __sNpConfig.fontSize)
+			frame.oldname:SetFont(__sNpCore.art.font.cstm.e[1], (__sNpConfig.fontSize))
+			frame.castbar.time:SetFont(__sNpCore.art.font.cstm.e[1], __sNpConfig.fontSize)
+			frame.castbar.name:SetFont(__sNpCore.art.font.cstm.e[1], __sNpConfig.fontSize)
+			frame.health.percent:SetFont(__sNpCore.art.font.cstm.e[1], __sNpConfig.fontSize)
+		end
 	else
-		frame.name:SetFont(__sNpCore.art.font.default[1], (__sNpConfig.fontSize+4))
-		frame.level:SetFont(__sNpCore.art.font.default[1], __sNpConfig.fontSize)
-		frame.oldname:SetFont(__sNpCore.art.font.default[1], (__sNpConfig.fontSize))
-		frame.castbar.time:SetFont(__sNpCore.art.font.default[1], __sNpConfig.fontSize)
-		frame.castbar.name:SetFont(__sNpCore.art.font.default[1], __sNpConfig.fontSize)
-		frame.health.percent:SetFont(__sNpCore.art.font.default[1], __sNpConfig.fontSize)
+		if __sNpCore.isChineseClient then
+			frame.name:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize+4), __sNpCore.art.chinese[2])
+			frame.level:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+			frame.oldname:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize), __sNpCore.art.chinese[2])
+			frame.castbar.time:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+			frame.castbar.name:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+			frame.health.percent:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
+		else
+			frame.name:SetFont(__sNpCore.art.font.default[1], (__sNpConfig.fontSize+4))
+			frame.level:SetFont(__sNpCore.art.font.default[1], __sNpConfig.fontSize)
+			frame.oldname:SetFont(__sNpCore.art.font.default[1], (__sNpConfig.fontSize))
+			frame.castbar.time:SetFont(__sNpCore.art.font.default[1], __sNpConfig.fontSize)
+			frame.castbar.name:SetFont(__sNpCore.art.font.default[1], __sNpConfig.fontSize)
+			frame.health.percent:SetFont(__sNpCore.art.font.default[1], __sNpConfig.fontSize)
+		end
 	end
 	if (__sNpConfig.classMedia == 1 and GetCVar('_sNpCIcon') == '1') then
 		frame.classIcon:SetTexture(__sNpCore.art.classicon.square.f[1])
