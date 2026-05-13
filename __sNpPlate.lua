@@ -49,9 +49,9 @@ function sohighPlates:InitializeFrame(frame)
 	frame.health.percent = frame.health:CreateFontString(nil, 'OVERLAY')
 	-- 中文客户端使用内置中文字体
 	if __sNpCore.art.chinese then
-		frame.health.percent:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize+4), __sNpCore.art.chinese[2])
+		frame.health.percent:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
 	else
-		frame.health.percent:SetFont(__sNpCore.art.font.cstm.a[1], (__sNpConfig.fontSize+4))
+		frame.health.percent:SetFont(__sNpCore.art.font.cstm.a[1], __sNpConfig.fontSize)
 	end
 	frame.health.percent:SetPoint('RIGHT', -5, 0)
 	frame.health.percent:SetTextColor(1, 1, 1)
@@ -82,9 +82,9 @@ function sohighPlates:InitializeFrame(frame)
 	frame.level:SetJustifyH('LEFT')
 	-- 中文客户端使用内置中文字体
 	if __sNpCore.art.chinese then
-		frame.level:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize+4), __sNpCore.art.chinese[2])
+		frame.level:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
 	else
-		frame.level:SetFont(__sNpCore.art.font.cstm.a[1], (__sNpConfig.fontSize+4))
+		frame.level:SetFont(__sNpCore.art.font.cstm.a[1], __sNpConfig.fontSize)
 	end
 	frame.level:SetShadowOffset(2, -2)
 	
@@ -98,9 +98,9 @@ function sohighPlates:InitializeFrame(frame)
 	frame.name:SetPoint('BOTTOM', frame.health, 'TOP', __sNpConfig.nameXpos, __sNpConfig.nameYpos)
 	-- 中文客户端使用内置中文字体
 	if __sNpCore.art.chinese then
-		frame.name:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize+4), __sNpCore.art.chinese[2])
+		frame.name:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
 	else
-		frame.name:SetFont(__sNpCore.art.font.cstm.a[1], (__sNpConfig.fontSize+4))
+		frame.name:SetFont(__sNpCore.art.font.cstm.a[1], __sNpConfig.fontSize)
 	end
 	frame.name:SetTextColor(unpack(__sNpCore.status.name))
 	frame.name:SetShadowOffset(2, -2)
@@ -149,9 +149,9 @@ function sohighPlates:InitializeFrame(frame)
 	frame.castbar.time = frame.castbar:CreateFontString(nil, 'ARTWORK')
 	-- 中文客户端使用内置中文字体
 	if __sNpCore.art.chinese then
-		frame.castbar.time:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize+4), __sNpCore.art.chinese[2])
+		frame.castbar.time:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
 	else
-		frame.castbar.time:SetFont(__sNpCore.art.font.default[1], (__sNpConfig.fontSize+4))
+		frame.castbar.time:SetFont(__sNpCore.art.font.default[1], __sNpConfig.fontSize)
 	end
 	frame.castbar.time:SetTextColor(1, 1, 1)
 	frame.castbar.time:SetShadowOffset(2, -2)
@@ -159,9 +159,9 @@ function sohighPlates:InitializeFrame(frame)
 	frame.castbar.name = frame.castbar:CreateFontString(nil, 'ARTWORK')
 	-- 中文客户端使用内置中文字体
 	if __sNpCore.art.chinese then
-		frame.castbar.name:SetFont(__sNpCore.art.chinese[1], (__sNpConfig.fontSize+4), __sNpCore.art.chinese[2])
+		frame.castbar.name:SetFont(__sNpCore.art.chinese[1], __sNpConfig.fontSize, __sNpCore.art.chinese[2])
 	else
-		frame.castbar.name:SetFont(__sNpCore.art.font.default[1], (__sNpConfig.fontSize+4))
+		frame.castbar.name:SetFont(__sNpCore.art.font.default[1], __sNpConfig.fontSize)
 	end
 	frame.castbar.name:SetTextColor(1, 1, 1)
 	frame.castbar.name:SetShadowOffset(2, -2)

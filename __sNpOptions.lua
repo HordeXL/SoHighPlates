@@ -274,7 +274,7 @@ __sNpMenu.hpHeight = CreateFrame('Slider', 'sNpOptions.hpHeight', __sNpMenu, 'Op
 __sNpMenu.hpHeight:SetWidth(130) __sNpMenu.hpHeight:SetHeight(16)
 __sNpMenu.hpHeight:SetPoint('TOP', __sNpMenu.hpWidth, 160, 0)
 __sNpMenu.hpHeight:SetMinMaxValues(8, 35)
-__sNpMenu.hpHeight:SetValue(17)
+__sNpMenu.hpHeight:SetValue(14)
 __sNpMenu.hpHeight:SetValueStep(1)
 __sNpMenu.hpHeight:SetScript('OnValueChanged', function()
 	__sNpConfig.hpHeight = __sNpMenu.hpHeight:GetValue()
